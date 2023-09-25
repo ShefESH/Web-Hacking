@@ -18,7 +18,7 @@ OR run app.py
 
 ```
 $ sudo docker build -t web-hacking .
-$ sudo docker run -p 5000:5000 webhacking
+$ sudo docker run -p 5000:5000 web-hacking
 ```
 
 ## Solutions
