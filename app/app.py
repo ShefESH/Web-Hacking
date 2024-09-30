@@ -111,6 +111,18 @@ def insert_comment():
 
     return redirect("/xss1")
 
+
+@app.route("/xss1/clear", methods=["POST"])
+def clear_comments():
+    """clear all comments for user"""
+    check_session()
+    conn = get_db_connection()
+    conn.execute("DELETE FROM comments WHERE userid = ?", (session["userid"],))
+    conn.commit()
+    conn.close()
+
+    return redirect("/xss1")
+
 @app.route("/sqli1")
 def sqli1():
     """SQLi to login"""

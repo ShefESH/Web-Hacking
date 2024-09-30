@@ -9,7 +9,9 @@
 <h1>Cross-Site Scripting (XSS) - Challenge 1</h1>
 
 <h3>Can you cause an alert using stored XSS?</h3>
-
+<form action="/xss1/clear" method="POST">
+    <button type="submit">Clear all my comments</button>
+ </form>
 <button onclick="showHide()">Show Hint</button>
 
 <div id="chall-hint" style="display: none">
