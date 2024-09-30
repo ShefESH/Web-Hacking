@@ -9,7 +9,7 @@ RUN chown -R www-data:www-data /var/www/html
 WORKDIR /var/www/html
 
 #install requirements as root
-RUN python3 -m pip install -r requirements.txt
+RUN python3 -m pip install --break-system-packages -r requirements.txt
 
 USER www-data
 
