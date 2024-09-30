@@ -87,7 +87,7 @@ def xss2():
         return render_template("xss2.html")
 
 @app.route("/xss1")
-def xss2():
+def xss1():
     """alert the cookie via stored + redirect user to their page"""
     check_session()
 
