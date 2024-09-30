@@ -134,7 +134,8 @@ def login():
         return redirect(url_for("admin", allowed=True))
     else:
         print("Wrong username or password")
-        return render_template("sqli1.html", error="Wrong email or password")
+        full_sql_command = f"SELECT id, username FROM users WHERE username='{username}' AND password='{password}'"
+        return render_template("sqli1.html", error="Wrong email or password", full_sql_command=full_sql_command)
 
 @app.route("/admin")
 def admin():
