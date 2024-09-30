@@ -10,7 +10,6 @@ WORKDIR /var/www/html
 
 #install requirements as root
 RUN python3 -m pip install --break-system-packages -r requirements.txt
->>>>>>> b7e3cd0d2f29517f58d539dea07d4e6637ed6fa9
 
 USER www-data
 
