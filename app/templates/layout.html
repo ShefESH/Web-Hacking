@@ -2,7 +2,6 @@
 {% extends "bootstrap/base.html" %}
 
 <html>
-    <p><a href="/">&lt; Home</a></p>
     {% block head %}
         <head>
             {% block styles %}
@@ -16,6 +15,7 @@
     {% block body %}
         <body>
             <div id="wrapper">
+                <p><a href="/">&lt; Home</a></p>
                 <div id="content">
                     {% block content %}
                     {% endblock %}
