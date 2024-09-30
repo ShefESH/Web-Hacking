@@ -8,33 +8,30 @@
 
 <h1>Cross-Site Scripting (XSS) - Challenge 2</h1>
 
-<h3>Can you cause an alert using stored XSS?</h3>
+<h3>Can you cause this webpage to pop up an alert?</h3>
 
 <button onclick="showHide()">Show Hint</button>
 
 <div id="chall-hint" style="display: none">
-    Some XSS payloads are delivered in the URL, but some are stored permanently in a database.
-</div>
+    XSS occurs when user input isn't handled properly. You can use it to force to webpage to run javascript code. Try looking for somewhere on this page where you can input data and look up the javascript syntax for an alert.
+</div> 
 
-<h4>Post a comment about our society :)</h4>
+{% if order %}
 
-<form action="/xss2/comment" method="POST">
-    <label for="comment">Your Comment:</label>
-    <input type="text" name="comment" id="comment">
+<p>You successfully ordered {{quantity | safe}} {{flavour}} cookies!</p>
 
-    <input type="submit" value="Submit Comment">
+{% else %}
+
+<h4>Order Cookies</h4>
+
+<form action="/xss2">
+    <label for="flavour">Flavour:</label>
+    <input type="text" name="flavour" id="flavour">
+
+    <label for="points">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" step="1">
+    <input type="submit" value="Submit Order">
 </form>
-
-{% if comments is defined %}
-
-<h3>Comments</h3>
-{% for comment in comments %}
-<div class="comment">
-    <p>DB ID: {{ comment["id"] }}</p>
-    <p>Comment: {{ comment["comment"] | safe}}</p>
-    <p>User ID: {{ comment["userid"] }}</p>
-</div>
-{% endfor %}
 
 {% endif %}
 

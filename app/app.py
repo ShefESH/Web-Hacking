@@ -76,18 +76,18 @@ def index():
 
     return render_template("index.html")
 
-@app.route("/xss1")
-def xss1():
+@app.route("/xss2")
+def xss2():
     """alert the cookie via reflected"""
     check_session()
 
     if request.args.get("flavour") and request.args.get("quantity"):
-        return render_template("xss1.html", order=True, flavour=request.args.get("flavour"), quantity=request.args.get("quantity"))
+        return render_template("xss2.html", order=True, flavour=request.args.get("flavour"), quantity=request.args.get("quantity"))
     else:
-        return render_template("xss1.html")
+        return render_template("xss2.html")
 
-@app.route("/xss2")
-def xss2():
+@app.route("/xss1")
+def xss1():
     """alert the cookie via stored + redirect user to their page"""
     check_session()
 
@@ -95,11 +95,11 @@ def xss2():
     comments = conn.execute("SELECT * FROM comments WHERE userid = ?", (session["userid"],)).fetchall()
 
     if len(comments) > 0:
-        return render_template("xss2.html", comments=comments)
+        return render_template("xss1.html", comments=comments)
     else:
-        return render_template("xss2.html")
+        return render_template("xss1.html")
 
-@app.route("/xss2/comment", methods=["POST"])
+@app.route("/xss1/comment", methods=["POST"])
 def insert_comment():
     """insert a comment"""
     check_session()
@@ -109,7 +109,19 @@ def insert_comment():
     conn.commit()
     conn.close()
 
-    return redirect("/xss2")
+    return redirect("/xss1")
+
+
+@app.route("/xss1/clear", methods=["POST"])
+def clear_comments():
+    """clear all comments for user"""
+    check_session()
+    conn = get_db_connection()
+    conn.execute("DELETE FROM comments WHERE userid = ?", (session["userid"],))
+    conn.commit()
+    conn.close()
+
+    return redirect("/xss1")
 
 @app.route("/sqli1")
 def sqli1():
@@ -134,7 +146,8 @@ def login():
         return redirect(url_for("admin", allowed=True))
     else:
         print("Wrong username or password")
-        return render_template("sqli1.html", error="Wrong email or password")
+        full_sql_command = f"SELECT id, username FROM users WHERE username='{username}' AND password='{password}'"
+        return render_template("sqli1.html", error="Wrong email or password", full_sql_command=full_sql_command)
 
 @app.route("/admin")
 def admin():

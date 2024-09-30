@@ -15,6 +15,7 @@
     {% block body %}
         <body>
             <div id="wrapper">
+                <p><a href="/">&lt; Home</a></p>
                 <div id="content">
                     {% block content %}
                     {% endblock %}
@@ -25,6 +26,14 @@
         <script>
             function showHide() {
                 var x = document.getElementById("chall-hint");
+                if (x.style.display === "none") {
+                  x.style.display = "block";
+                } else {
+                  x.style.display = "none";
+                }
+              }
+              function showSQL() {
+                var x = document.getElementById("sql-hint");
                 if (x.style.display === "none") {
                   x.style.display = "block";
                 } else {

@@ -13,7 +13,15 @@
 <button onclick="showHide()">Show Hint</button>
 
 <div id="chall-hint" style="display: none">
-    SQL injection can occur when a user input is treated as SQL code, rather than as text. You can use a basic injection technique to bypass this login form. Try to provoke an error if you're stuck, this will tell you you're on the right track. And try multiple different SQL syntaxes.
+    <p>SQL injection can occur when a user input is treated as SQL code, rather than as text. You can use a basic injection technique to bypass this login form. Try to provoke an error if you're stuck, this will tell you you're on the right track. And try multiple different SQL syntaxes.</p>
+</div>
+
+<button onclick="showSQL()">Show Resulting SQL command</button>
+
+<div id="sql-hint" style="display: none">
+  <p>Your submitted SQL request looks like this to the server: </p>
+  <p>{{full_sql_command}}</p>
+  <p>Try to interfere with the command so that it will always return a user.</p>
 </div>
 
 <h4>Admins Login Here</h4>
